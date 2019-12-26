@@ -1,0 +1,30 @@
+/* Toxicity is a very famous tensorflow js model used to calculate the toxicity in the
+sentence written by the user .here i am useing the same model to get inference from the model */
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/toxicity"></script>
+    <script>
+        const threshold = 0.9;
+        toxicity.load(threshold).then(model => {
+            const sentences = ['you suck'];
+            model.classify(sentences).then(predictions => {
+                console.log(predictions);
+                document.write("given sentence : " + sentences + "<br /");
+                for (i = 0; i < 7; i++) {
+                    if (predictions[i].results[0].match) {
+                        document.write(predictions[i].label +
+                            " was found with probability of " +
+                            predictions[i].results[0].probabilities[1] + "<br />");
+                    }
+                }
+            });
+        });
+    </script>
+
+<body>
+</body>
+</head>
+
+</html>
